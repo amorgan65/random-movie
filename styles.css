@@ -21,10 +21,16 @@ body {
   padding: 50px;
 }
 
+#search {
+    background-color: yellowgreen;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
 #genres {
   display: flex;
   justify-content: space-evenly;
-  border: 1px solid black;
+  border: 1px white dashed;
   border-radius: 10px;
   flex-wrap: wrap;
 }
@@ -38,8 +44,8 @@ button {
   border: 0px;
 }
 
-button:hover {
-  opacity: 50%;
+button:focus {
+    opacity: 50%;
 }
 
 #footer {
