@@ -10,6 +10,7 @@
 }
 
 body {
+    /* background image generated from https://app.haikei.app */
   background-image: url(/images/layered-waves-haikei.svg);
   background-size: cover;
 }
