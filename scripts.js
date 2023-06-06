@@ -24,7 +24,7 @@ window.onload = () => {
 
 /* From a given genre, as String, fetch movie information from The Movie Database API */
 function getMovie(genre) {
-  /*TODO API call to get info. How to pick a movie? Options:
+  /* TODO API call to get info. How to pick a movie? Options:
         1) Throw out top trending movie from selected genre?
             -for any subsequent searches, keep going down list?
         2) Randomly generate number from 1-100, use to pick from top 100 movies?
@@ -32,18 +32,19 @@ function getMovie(genre) {
 }
 
 function displayInfo() {
-  var displayDiv = document.getElementById("result");
+  const displayDiv = document.getElementById("result");
 
   const title = document.createElement("p");
-  title.setAttribute("id", "movieTitle"); //TODO get title of movie from API, store as global variable
+  title.setAttribute("id", "movieTitle"); // TODO get title of movie from API, store as global variable
   title.innerHTML = "Title: " + movieTitle;
   displayDiv.appendChild(title);
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  var searchButton = document.getElementById("search");
+  const searchButton = document.getElementById("search");
   searchButton.addEventListener("click", () => {
-    searchButton.innerHTML = selectedGenre;
+    searchButton.disabled = true; // TODO make new button to reset variables? allow for a new search?
+    searchButton.innerHTML = selectedGenre; //TODO change later, here for testing only
     getMovie(selectedGenre);
     displayInfo();
   });
