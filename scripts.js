@@ -2,7 +2,6 @@
 const GENRES = ["action", "comedy", "horror"];
 
 let selectedGenre;
-
 let movieTitle;
 
 window.onload = () => {
@@ -10,14 +9,16 @@ window.onload = () => {
 
   GENRES.forEach((genre) => {
     const btn = document.createElement("button");
+
     btn.setAttribute("data-genre", genre);
     btn.setAttribute("value", genre);
     btn.setAttribute("type", "button");
     btn.innerHTML = genre;
     genresDiv.appendChild(btn);
-    btn.addEventListener("click", (e) => {
-      let x = e.target.value;
-      selectedGenre = x;
+
+    btn.addEventListener("click", (element) => {
+      let clickedGenre = element.target.value;
+      selectedGenre = clickedGenre;
     });
   });
 };
@@ -31,6 +32,8 @@ function getMovie(genre) {
         3) Maybe option to check for this year only vs. all time? */
 }
 
+/* When called, this will create new DOM elements displaying the randomly
+    selected movie's information */
 function displayInfo() {
   const displayDiv = document.getElementById("result");
 
