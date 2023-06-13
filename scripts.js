@@ -4,6 +4,16 @@ const GENRES = ["action", "comedy", "horror"];
 let selectedGenre;
 let movieTitle;
 
+/* Function to get Genre data through API Fetch request*/
+function fetchGenres() {
+
+}
+
+/* create & fill array/map of all genres (& maybe with corresponding IDs?) */
+function setGenres() {
+
+}
+
 window.onload = () => {
   let genresDiv = document.getElementById("genres");
 
