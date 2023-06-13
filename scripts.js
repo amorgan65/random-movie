@@ -6,7 +6,7 @@ let selectedGenre;
 let movieTitle;
 
 window.onload = () => {
-  var genresDiv = document.getElementById("genres");
+  let genresDiv = document.getElementById("genres");
 
   GENRES.forEach((genre) => {
     const btn = document.createElement("button");
@@ -34,10 +34,22 @@ function getMovie(genre) {
 function displayInfo() {
   const displayDiv = document.getElementById("result");
 
-  const title = document.createElement("p");
-  title.setAttribute("id", "movieTitle"); // TODO get title of movie from API, store as global variable
-  title.innerHTML = "Title: " + movieTitle;
-  displayDiv.appendChild(title);
+  //TODO API request popular movies, get first movie that matches genre id/button clicked
+
+  //TODO call getMovie(selected genre?)
+  const movieData = new Map(); //Should prob grab this info from api request instead. Dummy values for test
+
+  movieData.set("Title", "ExampleTitle"); //TODO use loop to set key/value pairs from API request
+  movieData.set("Overview", "example text long description lorem ipsum"); //TODO
+  movieData.set("Release Date", "2023-06-12"); //TODO
+
+  for (let [key, value] of movieData) {
+    let p = document.createElement("p");
+    p.setAttribute("id", key); // TODO
+    p.innerHTML = key + ": " + value; // TODO
+
+    displayDiv.appendChild(p);
+  }
 }
 
 window.addEventListener("DOMContentLoaded", () => {
