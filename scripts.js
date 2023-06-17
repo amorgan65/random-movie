@@ -49,14 +49,17 @@ window.onload = () => {
   });
 };
 
-/* From a given genre, as String (ID?), fetch movie information from The Movie Database API */
-function getMovie(genre) {
+/* Fetch movie information from The Movie Database API, by most popular */
+function fetchPopularMovies(page) {
   /* TODO API call to get info. How to pick a movie? Options:
         1) Throw out top trending movie from selected genre?
             -for any subsequent searches, keep going down list?
         2) Randomly generate number from 1-100, use to pick from top 100 movies?
         3) Maybe option to check for this year only vs. all time? */
+}
 
+/* From a given genre, as String (ID number?), find & return movie object with matching ID */
+function getMovie(genre) {
   // TODO loop through 20 most popular, returns object of the movie containing
   //  the first equivalent genre-id, IF none found? need to fetch page 2 of popular?
 }
