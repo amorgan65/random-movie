@@ -4,6 +4,22 @@ const GENRES = ["action", "comedy", "horror"];
 let selectedGenre;
 let movieTitle;
 
+/* Combining POSTER_BASE_PATH + posterSizes[i] + movie.posterPath gives link to movie poster */
+const POSTER_BASE_PATH = "https://image.tmdb.org/t/p/";
+const posterSizes = ["w92", "w154", "w185", "w342", "w500", "w780", "original"];
+
+//TODO store movies (gathered from API get for most popular) as an object
+let movie = {
+  //TODO get properties from API?
+  title: "",
+  genre: "",
+  length: "",
+  rating: "",
+  description: "",
+  posterPath: "",
+
+};
+
 /* Function to get Genre data through API Fetch request*/
 function fetchGenres() {
 
