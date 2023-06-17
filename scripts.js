@@ -11,12 +11,12 @@ const posterSizes = ["w92", "w154", "w185", "w342", "w500", "w780", "original"];
 //TODO store movies (gathered from API get for most popular) as an object
 let movie = {
   //TODO get properties from API?
-  title: "",
-  genre: "",
-  length: "",
-  rating: "",
-  description: "",
-  posterPath: "",
+  title: "", // property from request: 'original_title'
+  genreIds: [], // 'genre_ids'
+  length: "", // to get this, separate API request from movies ID, get movie details, 'runtime'
+  rating: "", // 'vote_average'
+  description: "", // 'overview'
+  posterPath: POSTER_BASE_PATH + posterSizes[3] + "", // 'poster_path'
 
 };
 
@@ -49,13 +49,16 @@ window.onload = () => {
   });
 };
 
-/* From a given genre, as String, fetch movie information from The Movie Database API */
+/* From a given genre, as String (ID?), fetch movie information from The Movie Database API */
 function getMovie(genre) {
   /* TODO API call to get info. How to pick a movie? Options:
         1) Throw out top trending movie from selected genre?
             -for any subsequent searches, keep going down list?
         2) Randomly generate number from 1-100, use to pick from top 100 movies?
         3) Maybe option to check for this year only vs. all time? */
+
+  // TODO loop through 20 most popular, returns object of the movie containing
+  //  the first equivalent genre-id, IF none found? need to fetch page 2 of popular?
 }
 
 /* When called, this will create new DOM elements displaying the randomly
@@ -66,18 +69,19 @@ function displayInfo() {
   //TODO API request popular movies, get first movie that matches genre id/button clicked
 
   //TODO call getMovie(selected genre?)
-  const movieData = new Map(); //Should prob grab this info from api request instead. Dummy values for test
+  for (let key in movie) {
+    if (key === 'posterPath') {
+      let img = document.createElement('img');
+      img.setAttribute('src', movie[key]);
 
-  movieData.set("Title", "ExampleTitle"); //TODO use loop to set key/value pairs from API request
-  movieData.set("Overview", "example text long description lorem ipsum"); //TODO
-  movieData.set("Release Date", "2023-06-12"); //TODO
+      displayDiv.appendChild(img);
+    } else {
+      let p = document.createElement('p');
+      p.setAttribute('id', key); // TODO need to fix data before display? Capitalize, spacing
+      p.innerHTML = key + ": " + movie[key];
 
-  for (let [key, value] of movieData) {
-    let p = document.createElement("p");
-    p.setAttribute("id", key); // TODO
-    p.innerHTML = key + ": " + value; // TODO
-
-    displayDiv.appendChild(p);
+      displayDiv.appendChild(p);
+    }
   }
 }
 
