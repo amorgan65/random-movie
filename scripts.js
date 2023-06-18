@@ -1,53 +1,32 @@
-//TODO get array of genres from API call?
-const GENRES = ["action", "comedy", "horror"];
+const GENRES = ["action", "comedy", "horror"]; //TODO store genre ID and genre as Map? (from API)
+let popularMovies = [];
 
 let selectedGenre;
-let movieTitle;
 
 /* Combining POSTER_BASE_PATH + posterSizes[i] + movie.posterPath gives link to movie poster */
 const POSTER_BASE_PATH = "https://image.tmdb.org/t/p/";
 const posterSizes = ["w92", "w154", "w185", "w342", "w500", "w780", "original"];
 
-//TODO store movies (gathered from API get for most popular) as an object
+//TODO get properties from API?
 let movie = {
-  //TODO get properties from API?
   title: "", // property from request: 'original_title'
   genreIds: [], // 'genre_ids'
   length: "", // to get this, separate API request from movies ID, get movie details, 'runtime'
   rating: "", // 'vote_average'
   description: "", // 'overview'
-  posterPath: POSTER_BASE_PATH + posterSizes[3] + "", // 'poster_path'
+  posterPath: POSTER_BASE_PATH + posterSizes[3] + "", // 'poster_path' 
 
 };
 
 /* Function to get Genre data through API Fetch request*/
 function fetchGenres() {
-
+  // stored as JSON: genres[{'id': 28, 'name': 'Action'}]
 }
 
 /* create & fill array/map of all genres (& maybe with corresponding IDs?) */
 function setGenres() {
 
 }
-
-window.onload = () => {
-  let genresDiv = document.getElementById("genres");
-
-  GENRES.forEach((genre) => {
-    const btn = document.createElement("button");
-
-    btn.setAttribute("data-genre", genre);
-    btn.setAttribute("value", genre);
-    btn.setAttribute("type", "button");
-    btn.innerHTML = genre;
-    genresDiv.appendChild(btn);
-
-    btn.addEventListener("click", (element) => {
-      let clickedGenre = element.target.value;
-      selectedGenre = clickedGenre;
-    });
-  });
-};
 
 /* Fetch movie information from The Movie Database API, by most popular */
 function fetchPopularMovies(page) {
@@ -62,14 +41,14 @@ function fetchPopularMovies(page) {
 function getMovie(genre) {
   // TODO loop through 20 most popular, returns object of the movie containing
   //  the first equivalent genre-id, IF none found? need to fetch page 2 of popular?
+
+
 }
 
 /* When called, this will create new DOM elements displaying the randomly
     selected movie's information */
 function displayInfo() {
   const displayDiv = document.getElementById("result");
-
-  //TODO API request popular movies, get first movie that matches genre id/button clicked
 
   //TODO call getMovie(selected genre?)
   for (let key in movie) {
@@ -87,6 +66,24 @@ function displayInfo() {
     }
   }
 }
+
+window.onload = () => {
+  let genresDiv = document.getElementById("genres");
+
+  GENRES.forEach((genre) => {
+    const btn = document.createElement("button");
+
+    btn.setAttribute("value", genre);
+    btn.setAttribute("type", "button");
+    btn.innerHTML = genre;
+    genresDiv.appendChild(btn);
+
+    btn.addEventListener("click", (element) => {
+      let clickedGenre = element.target.value;
+      selectedGenre = clickedGenre;
+    });
+  });
+};
 
 window.addEventListener("DOMContentLoaded", () => {
   const searchButton = document.getElementById("search");
