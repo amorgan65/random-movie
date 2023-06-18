@@ -1,5 +1,5 @@
 const GENRES = ["action", "comedy", "horror"]; //TODO store genre ID and genre as Map? (from API)
-let popularMovies = [];
+let popularMovies = []; // TODO implement as a Map instead of Array ???
 
 let selectedGenre;
 
@@ -14,7 +14,7 @@ let movie = {
   length: "", // to get this, separate API request from movies ID, get movie details, 'runtime'
   rating: "", // 'vote_average'
   description: "", // 'overview'
-  posterPath: POSTER_BASE_PATH + posterSizes[3] + "", // 'poster_path' 
+  posterPath: POSTER_BASE_PATH + posterSizes[3] + "", // 'poster_path'
 
 };
 
@@ -37,12 +37,25 @@ function fetchPopularMovies(page) {
         3) Maybe option to check for this year only vs. all time? */
 }
 
-/* From a given genre, as String (ID number?), find & return movie object with matching ID */
-function getMovie(genre) {
+/* From a given genre ID number, find & return movie object with matching ID */
+function getMovie(genreID) {
   // TODO loop through 20 most popular, returns object of the movie containing
   //  the first equivalent genre-id, IF none found? need to fetch page 2 of popular?
+  for (const movie of popularMovies) {
+    if (movie.genreIds.includes(genreID)) {
+      return movie;
+    }
+  }
+  //TODO if no movie w matching genre found, search for new results, search more popular movies?
+}
 
-
+/* Find the associated genre ID (int) of the chosen genre (string) from GENRES Map */
+function getGenreID(genre) {
+  for (const [key, value] of GENRES) {
+    if (genre === value) {
+      return key;
+    }
+  }
 }
 
 /* When called, this will create new DOM elements displaying the randomly
