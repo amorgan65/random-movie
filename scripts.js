@@ -6,9 +6,13 @@ let selectedGenre;
 /* Combining POSTER_BASE_PATH + posterSizes[i] + movie.posterPath gives link to movie poster */
 const POSTER_BASE_PATH = "https://image.tmdb.org/t/p/";
 const posterSizes = ["w92", "w154", "w185", "w342", "w500", "w780", "original"];
+//TODO pick poster size depending on device? screen size?
 
+//TODO should probably represent movie object with constructor, to make new movie objects?
 //TODO get properties from API?
 let movie = {
+  //TODO save genreIDs and posterPath as Symbols, so they're not accessed by for..in loop looking for
+  // elements to add to page later on. Distinguish identifiers from page elements?
   title: "", // property from request: 'original_title'
   genreIds: [], // 'genre_ids'
   length: "", // to get this, separate API request from movies ID, get movie details, 'runtime'
@@ -35,6 +39,8 @@ function fetchPopularMovies(page) {
             -for any subsequent searches, keep going down list?
         2) Randomly generate number from 1-100, use to pick from top 100 movies?
         3) Maybe option to check for this year only vs. all time? */
+
+  //TODO use existing sample movie object
 }
 
 /* From a given genre ID number, find & return movie object with matching ID */
@@ -58,13 +64,15 @@ function getGenreID(genre) {
   }
 }
 
+//TODO can refactor code by creating new functions to split this up
+//TODO like making functions to get HTML element, and Create HTML elements
 /* When called, this will create new DOM elements displaying the randomly
     selected movie's information */
 function displayInfo() {
   const displayDiv = document.getElementById("result");
 
   //TODO call getMovie(selected genre?)
-  for (let key in movie) {
+  for (let key in movie) { //TODO change movie to reference to getMovie(picked genre)
     if (key === 'posterPath') {
       let img = document.createElement('img');
       img.setAttribute('src', movie[key]);
