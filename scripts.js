@@ -1,7 +1,11 @@
 const GENRES = ["action", "comedy", "horror"]; //TODO store genre ID and genre as Map? (from API)
-let popularMovies = []; // TODO implement as a Map instead of Array ???
-
+let popularMovies = [];
+//TODO implement as a Map instead of Array ???
+//  could store Movie object as key, with genreID as value? or the movie's ID?
 let selectedGenre;
+
+//TODO consider implementing popularMovies as a weakMap, so when movie is displayed,
+//  just setting that object equal to null removes it from the Map!
 
 /* Combining POSTER_BASE_PATH + posterSizes[i] + movie.posterPath gives link to movie poster */
 const POSTER_BASE_PATH = "https://image.tmdb.org/t/p/";
@@ -26,6 +30,7 @@ function Movie(title, genreIds, runtime, rating, description, posterPath) {
   //TODO get properties from API?
 }
 
+// empty movie object for testing
 let movie = new Movie("", [], "", "", "", "");
 
 /* Function to get Genre data through API Fetch request*/
@@ -35,7 +40,15 @@ function fetchGenres() {
 
 /* create & fill array/map of all genres (& maybe with corresponding IDs?) */
 function setGenres() {
+  //TODO change genres to the data from fetch
+  const genres = `{"genres": [{"id": 28, "name": "Action" }]}`
 
+  const genresObject = JSON.parse(genres);
+  let genreMap = new Map();
+
+  for (const entry of genresObject.genres) {
+    genreMap.set(entry.id, entry.name);
+  }
 }
 
 /* Fetch movie information from The Movie Database API, by most popular */
