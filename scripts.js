@@ -6,21 +6,27 @@ let selectedGenre;
 /* Combining POSTER_BASE_PATH + posterSizes[i] + movie.posterPath gives link to movie poster */
 const POSTER_BASE_PATH = "https://image.tmdb.org/t/p/";
 const posterSizes = ["w92", "w154", "w185", "w342", "w500", "w780", "original"];
-//TODO pick poster size depending on device? screen size?
+//TODO FIX THIS; currently just taking index 3, but should be
+//  determined based off of user's device somehow?
+let properPosterSize = posterSizes[3];
 
-//TODO should probably represent movie object with constructor, to make new movie objects?
-//TODO get properties from API?
-let movie = {
+/* Movie Object constructor */
+// TODO Make constructor w/ less parameters? like just
+//  based off of title or movie identifier number?
+function Movie(title, genreIds, runtime, rating, description, posterPath) {
   //TODO save genreIDs and posterPath as Symbols, so they're not accessed by for..in loop looking for
   // elements to add to page later on. Distinguish identifiers from page elements?
-  title: "", // property from request: 'original_title'
-  genreIds: [], // 'genre_ids'
-  length: "", // to get this, separate API request from movies ID, get movie details, 'runtime'
-  rating: "", // 'vote_average'
-  description: "", // 'overview'
-  posterPath: POSTER_BASE_PATH + posterSizes[3] + "", // 'poster_path'
+  this.title = title;
+  this.genreIds = genreIds;
+  this.length = length;
+  this.rating = rating;
+  this.description = description;
+  this.posterPath = posterPath;
+  this.posterURL = POSTER_BASE_PATH + properPosterSize + this.posterPath;
+  //TODO get properties from API?
+}
 
-};
+let movie = new Movie("", [], "", "", "", "");
 
 /* Function to get Genre data through API Fetch request*/
 function fetchGenres() {
@@ -48,7 +54,7 @@ function getMovie(genreID) {
   // TODO loop through 20 most popular, returns object of the movie containing
   //  the first equivalent genre-id, IF none found? need to fetch page 2 of popular?
   for (const movie of popularMovies) {
-    if (movie.genreIds.includes(genreID)) {
+    if (movie.genreIds.includes(genreID)) {//TODO fix condition for another movie of same genre
       return movie;
     }
   }
