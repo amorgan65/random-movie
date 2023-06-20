@@ -21,11 +21,11 @@ function Movie(title, genreIds, runtime, rating, description, posterPath) {
   //TODO save genreIDs and posterPath as Symbols, so they're not accessed by for..in loop looking for
   // elements to add to page later on. Distinguish identifiers from page elements?
   this.title = title;
-  this.genreIds = genreIds;
-  this.length = length;
+  this.genreIds = genreIds; // don't display
+  this.runtime = runtime;
   this.rating = rating;
   this.description = description;
-  this.posterPath = posterPath;
+  this.posterPath = posterPath; // dont display vvv
   this.posterURL = POSTER_BASE_PATH + properPosterSize + this.posterPath;
   //TODO get properties from API?
 }
@@ -39,7 +39,7 @@ function fetchGenres() {
 }
 
 /* create & fill array/map of all genres (& maybe with corresponding IDs?) */
-function setGenres() {
+function setGenres() {//TODO add parameter, should take in whatever fetchGenres returns?
   //TODO change genres to the data from fetch
   const genres = `{"genres": [{"id": 28, "name": "Action" }]}`
 
