@@ -1,11 +1,7 @@
 const GENRES = ["action", "comedy", "horror"]; //TODO store genre ID and genre as Map? (from API)
 let popularMovies = [];
-//TODO implement as a Map instead of Array ???
-//  could store Movie object as key, with genreID as value? or the movie's ID?
 let selectedGenre;
 
-//TODO consider implementing popularMovies as a weakMap, so when movie is displayed,
-//  just setting that object equal to null removes it from the Map!
 
 /* Combining POSTER_BASE_PATH + posterSizes[i] + movie.posterPath gives link to movie poster */
 const POSTER_BASE_PATH = "https://image.tmdb.org/t/p/";
@@ -53,11 +49,6 @@ function setGenres() {//TODO add parameter, should take in whatever fetchGenres 
 
 /* Fetch movie information from The Movie Database API, by most popular */
 function fetchPopularMovies(page) {
-  /* TODO API call to get info. How to pick a movie? Options:
-        1) Throw out top trending movie from selected genre?
-            -for any subsequent searches, keep going down list?
-        2) Randomly generate number from 1-100, use to pick from top 100 movies?
-        3) Maybe option to check for this year only vs. all time? */
 
   //TODO use existing sample movie object
 }
@@ -83,8 +74,6 @@ function getGenreID(genre) {
   }
 }
 
-//TODO can refactor code by creating new functions to split this up
-//TODO like making functions to get HTML element, and Create HTML elements
 /* When called, this will create new DOM elements displaying the randomly
     selected movie's information */
 function displayInfo() {
@@ -119,8 +108,7 @@ window.onload = () => {
     genresDiv.appendChild(btn);
 
     btn.addEventListener("click", (element) => {
-      let clickedGenre = element.target.value;
-      selectedGenre = clickedGenre;
+      selectedGenre = element.target.value;
     });
   });
 };
