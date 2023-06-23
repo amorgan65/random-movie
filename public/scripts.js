@@ -78,13 +78,13 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const request = new Request("/movies", {
       method: "GET",
-      body: `{"name": {$selectedGenre}}`,
+      body: `{"name": ${selectedGenre}}`,
     });
 
     fetch(request)
         .then((response) => {
           if (response.status === 200) {
-            return response.json();
+            return response.json(); //TODO maybe don't return, instead turn this into object? or save as const to access?
           } else {
             throw new Error("Something went wrong on the backend server");
           }
