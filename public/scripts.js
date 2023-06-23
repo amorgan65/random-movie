@@ -70,9 +70,21 @@ window.onload = () => {
 window.addEventListener("DOMContentLoaded", () => {
   const searchButton = document.getElementById("search");
   searchButton.addEventListener("click", () => {
+    //  TODO maybe pass in element, and set genre value
+    //      to search button?, then use that to pass to GET request for movie data?
+    
     searchButton.disabled = true; // TODO make new button to reset variables? allow for a new search?
     searchButton.innerHTML = selectedGenre; //TODO change later, here for testing only
-    getMovie(selectedGenre);
+
+    fetch('/movies', {method: 'GET'})
+        .then(function(response) {
+          if(response.ok) return response.json();
+          throw new Error("Request failed.");
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+
     displayInfo();
   });
 });
