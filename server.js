@@ -1,7 +1,9 @@
 const express = require('express');
-
 const app = express();
+const PORT = 3000;
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 //serve the main webpage
@@ -13,6 +15,12 @@ app.get('/', (req, res) => {
 app.get('/movies', (req, res) => {
     // TODO use Request object to read in the Genre to use in Query
     // TODO Use Response object to send the Movie object res.send(correct Movie Object)
+    const genre = req.body;
+
+    let selectedGenreID = getGenreID(genre.name);
+    let validMovie = getMovie(selectedGenreID);
+
+    res.send(validMovie);
 });
 
 /* Function to get Genre data through API Fetch request*/
